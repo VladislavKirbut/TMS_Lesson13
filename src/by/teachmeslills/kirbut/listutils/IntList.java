@@ -44,4 +44,14 @@ public class IntList {
     public int size() {
         return this.arrayOfNumbers.length;
     }
+
+    public void add(int element) {
+        int[] array = arrayOfNumbers.clone();
+        arrayOfNumbers = new int[array.length + 1];
+
+        for (int i = 0; i < array.length; i++)
+            arrayOfNumbers[i] = array[i];
+
+        arrayOfNumbers[arrayOfNumbers.length - 1] = element;
+    }
 }
