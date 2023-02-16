@@ -54,4 +54,24 @@ public class IntList {
 
         arrayOfNumbers[arrayOfNumbers.length - 1] = element;
     }
+
+    /*
+    * return element, which will be to remove
+    */
+    public int remove(int index) {
+        if (index < 0 || index >= arrayOfNumbers.length)
+            throw new IllegalArgumentException("This index doesn't exist.");
+
+        int[] array = arrayOfNumbers.clone();
+        arrayOfNumbers = new int[array.length - 1];
+        int count = 0;
+        int necessaryElement = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            if (i == index) necessaryElement = array[i];
+            else arrayOfNumbers[count++] = array[i];
+        }
+
+        return necessaryElement;
+    }
 }
