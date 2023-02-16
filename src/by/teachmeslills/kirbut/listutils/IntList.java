@@ -74,4 +74,29 @@ public class IntList {
 
         return necessaryElement;
     }
+
+    public IntList subList(int startIndexInclusive, int endIndexExclusive) {
+        int difference = endIndexExclusive - startIndexInclusive;
+
+        if (difference < 0 || difference > arrayOfNumbers.length)
+            return new IntList();
+
+        int[] newArr = new int[difference];
+        int count = 0;
+
+        for (int i = startIndexInclusive; i < endIndexExclusive; i++)
+            newArr[count++] = arrayOfNumbers[i];
+
+        return new IntList(newArr);
+    }
+
+    public static void main(String[] args) {
+        IntList list = new IntList(new int[] {5,4,3,4,56,7,8,6});
+        System.out.println(list.toString());
+
+        IntList list1 = list.subList(3,100);
+        System.out.println(list1.toString());
+
+        System.out.println(list.toString());
+    }
 }
