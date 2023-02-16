@@ -17,4 +17,11 @@ public class IntList {
     public String toString() {
         return Arrays.toString(this.arrayOfNumbers);
     }
+
+    public int get(int index) {
+        if (index < 0 || index >= arrayOfNumbers.length)
+            throw new IllegalArgumentException("This index doesn't exist.");
+
+        return arrayOfNumbers[index];
+    }
 }
