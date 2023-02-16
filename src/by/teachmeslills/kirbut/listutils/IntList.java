@@ -37,4 +37,11 @@ public class IntList {
 
         return previousElement;
     }
+
+    /*
+    * return length of list (array)
+    */
+    public int size() {
+        return this.arrayOfNumbers.length;
+    }
 }
