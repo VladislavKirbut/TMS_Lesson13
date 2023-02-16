@@ -24,4 +24,17 @@ public class IntList {
 
         return arrayOfNumbers[index];
     }
+
+    /*
+    * return previous element
+    */
+    public int set(int index, int element) {
+        if (index < 0 || index >= arrayOfNumbers.length)
+            throw new IllegalArgumentException("This index doesn't exist.");
+
+        int previousElement = arrayOfNumbers[index];
+        arrayOfNumbers[index] = element;
+
+        return previousElement;
+    }
 }
