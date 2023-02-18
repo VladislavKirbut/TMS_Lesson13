@@ -79,7 +79,7 @@ public class IntList {
         int difference = endIndexExclusive - startIndexInclusive;
 
         if (difference < 0 || difference > arrayOfNumbers.length)
-            return new IntList();
+            throw new IllegalArgumentException("Enter correct start or end index.");
 
         int[] newArr = new int[difference];
         int count = 0;
@@ -90,13 +90,17 @@ public class IntList {
         return new IntList(newArr);
     }
 
-    public static void main(String[] args) {
-        IntList list = new IntList(new int[] {5,4,3,4,56,7,8,6});
-        System.out.println(list.toString());
+    public IntList subList(int startIndexInclusive) {
+        if (startIndexInclusive < 0 || startIndexInclusive >= this.arrayOfNumbers.length)
+            throw new IllegalArgumentException("Enter a correct startIndex.");
 
-        IntList list1 = list.subList(3,100);
-        System.out.println(list1.toString());
+        int lengthOfArray = arrayOfNumbers.length - startIndexInclusive;
+        int[] newArr = new int[lengthOfArray];
+        int count = 0;
 
-        System.out.println(list.toString());
+        for (int i = startIndexInclusive; i < arrayOfNumbers.length; i++)
+            newArr[count++] = arrayOfNumbers[i];
+
+        return new IntList(newArr);
     }
 }
