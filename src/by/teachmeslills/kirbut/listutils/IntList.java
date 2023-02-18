@@ -103,4 +103,12 @@ public class IntList {
 
         return new IntList(newArr);
     }
+
+    public int lastIndexOf(int element) {
+        for (int i = arrayOfNumbers.length - 1; i >= 0; i--)
+            if (arrayOfNumbers[i] == element)
+                return i;
+
+        return -1;
+    }
 }
