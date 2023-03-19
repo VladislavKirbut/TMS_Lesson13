@@ -2,7 +2,7 @@ package by.teachmeslills.kirbut.listutils;
 
 import java.util.Arrays;
 
-public class IntList {
+public class IntList
 
     private int[] arrayOfNumbers;
 
