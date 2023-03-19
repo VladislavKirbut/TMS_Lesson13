@@ -11,11 +11,11 @@ public class IntList {
     }
 
     public IntList(int[] arrayOfNumbers) {
-        this.arrayOfNumbers = arrayOfNumbers;
+        this.arrayOfNumbers = Arrays.copyOf(arrayOfNumbers, arrayOfNumbers.length);
     }
-
+    @Override
     public String toString() {
-        return Arrays.toString(this.arrayOfNumbers);
+        return Arrays.toString(arrayOfNumbers);
     }
 
     public int get(int index) {
@@ -25,9 +25,6 @@ public class IntList {
         return arrayOfNumbers[index];
     }
 
-    /*
-    * return previous element
-    */
     public int set(int index, int element) {
         if (index < 0 || index >= arrayOfNumbers.length)
             throw new IllegalArgumentException("This index doesn't exist.");
@@ -38,41 +35,28 @@ public class IntList {
         return previousElement;
     }
 
-    /*
-    * return length of list (array)
-    */
     public int size() {
-        return this.arrayOfNumbers.length;
+        return arrayOfNumbers.length;
     }
 
     public void add(int element) {
-        int[] array = arrayOfNumbers.clone();
-        arrayOfNumbers = new int[array.length + 1];
-
-        for (int i = 0; i < array.length; i++)
-            arrayOfNumbers[i] = array[i];
+        arrayOfNumbers = Arrays.copyOf(arrayOfNumbers, arrayOfNumbers.length + 1);
 
         arrayOfNumbers[arrayOfNumbers.length - 1] = element;
     }
 
-    /*
-    * return element, which will be to remove
-    */
     public int remove(int index) {
         if (index < 0 || index >= arrayOfNumbers.length)
             throw new IllegalArgumentException("This index doesn't exist.");
 
-        int[] array = arrayOfNumbers.clone();
-        arrayOfNumbers = new int[array.length - 1];
-        int count = 0;
-        int necessaryElement = 0;
+        int deletedElement = arrayOfNumbers[index];
+        int[] newArrayList = new int[arrayOfNumbers.length - 1];
 
-        for (int i = 0; i < array.length; i++) {
-            if (i == index) necessaryElement = array[i];
-            else arrayOfNumbers[count++] = array[i];
-        }
+        System.arraycopy(arrayOfNumbers, 0, newArrayList, 0, index);
+        System.arraycopy(arrayOfNumbers, index + 1, newArrayList, index, newArrayList.length - index);
+        arrayOfNumbers = newArrayList;
 
-        return necessaryElement;
+        return deletedElement;
     }
 
     public IntList subList(int startIndexInclusive, int endIndexExclusive) {
@@ -81,27 +65,13 @@ public class IntList {
         if (difference < 0 || difference > arrayOfNumbers.length)
             throw new IllegalArgumentException("Enter correct start or end index.");
 
-        int[] newArr = new int[difference];
-        int count = 0;
-
-        for (int i = startIndexInclusive; i < endIndexExclusive; i++)
-            newArr[count++] = arrayOfNumbers[i];
+        int[] newArr = Arrays.copyOfRange(arrayOfNumbers, startIndexInclusive, endIndexExclusive);
 
         return new IntList(newArr);
     }
 
     public IntList subList(int startIndexInclusive) {
-        if (startIndexInclusive < 0 || startIndexInclusive >= this.arrayOfNumbers.length)
-            throw new IllegalArgumentException("Enter a correct startIndex.");
-
-        int lengthOfArray = arrayOfNumbers.length - startIndexInclusive;
-        int[] newArr = new int[lengthOfArray];
-        int count = 0;
-
-        for (int i = startIndexInclusive; i < arrayOfNumbers.length; i++)
-            newArr[count++] = arrayOfNumbers[i];
-
-        return new IntList(newArr);
+        return subList(startIndexInclusive, arrayOfNumbers.length);
     }
 
     public int lastIndexOf(int element) {
